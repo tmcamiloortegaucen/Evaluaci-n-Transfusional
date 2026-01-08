@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Transfusión Sanguínea</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-icon">🩸</div>
+            <h1>Evaluación de CGR</h1>
+            <p class="subtitle">Herramienta educativa para selección de Concentrado de Glóbulos Rojos</p>
+        </header>
+
+        <main class="card">
+            <form id="evaluationForm" onsubmit="event.preventDefault(); evaluateTransfusion();">
+
+                <div class="form-grid">
+                    <!-- Datos Demográficos -->
+                    <div class="form-group">
+                        <label for="age">Edad</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="age" min="0" placeholder="0" required>
+                            <select id="ageUnit" class="unit-select">
+                                <option value="years">Años</option>
+                                <option value="months">Meses</option>
+                                <option value="days">Días</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sex">Sexo</label>
+                        <select id="sex" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weight">Peso (kg)</label>
+                        <input type="number" id="weight" min="0" step="0.1" placeholder="Ej. 70.5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="diagnosis">Diagnóstico / Servicio</label>
+                        <select id="diagnosis" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="cirugia">Cirugía / Trauma</option>
+                            <option value="uci">UCI / Críticos</option>
+                            <option value="hemato-onco">Hemato-Oncología</option>
+                            <option value="pediatria">Pediatría General</option>
+                            <option value="neonatologia">Neonatología</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+                <h3>Factores de Riesgo Clínico</h3>
+
+                <div class="checkbox-group-container">
+                    <label class="checkbox-card">
+                        <input type="checkbox" id="cancer">
+                        <div class="card-content">
+                            <span class="card-title">Cáncer Activo</span>
+                            <span class="card-desc">Diagnóstico oncológico actual</span>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-card">
+                        <input type="checkbox" id="immunosuppressed">
+                        <div class="card-content">
+                            <span class="card-title">Inmunosuprimido</span>
+                            <span class="card-desc">Transplante, quimio, inmunodeficiencia</span>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-card">
+                        <input type="checkbox" id="neonate">
+                        <div class="card-content">
+                            <span class="card-title">Neonato / Prematuro</span>
+                            <span class="card-desc">
+                                < 4 meses de vida</span>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-card">
+                        <input type="checkbox" id="anaphylaxis">
+                        <div class="card-content">
+                            <span class="card-title">Reacción Alérgica Grave</span>
+                            <span class="card-desc">Antecedente de anafilaxia previa</span>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-card">
+                        <input type="checkbox" id="cardioRenal">
+                        <div class="card-content">
+                            <span class="card-title">Patología Cardíaca/Renal</span>
+                            <span class="card-desc">Insuficiencia o riesgo de sobrecarga</span>
+                        </div>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    Evaluar Indicación
+                </button>
+            </form>
+
+            <div id="resultContainer" class="result-container hidden">
+                <div class="result-header">
+                    <h2>Recomendación</h2>
+                    <span class="badge" id="productBadge">CGR Estándar</span>
+                </div>
+
+                <div id="criteriaList" class="criteria-tags">
+                    <!-- Chips will be injected here e.g. [Irradiado] [Leucorreducido] -->
+                </div>
+
+                <div class="justification-box">
+                    <h4>Justificación Clínica:</h4>
+                    <p id="justificationText">Seleccione los parámetros del paciente para ver la recomendación.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p><strong>⚠️ Herramienta Educativa:</strong> Esta aplicación es un ejercicio de simulación. No reemplaza el
+                juicio clínico ni los protocolos oficiales de su banco de sangre.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
